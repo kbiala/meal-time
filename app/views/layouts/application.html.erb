@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="MealTimeModule">
   <head>
     <title>MealTime</title>
     <%= csrf_meta_tags %>
@@ -9,6 +9,8 @@
   </head>
 
   <body>
-    <%= yield %>
+    <div ng-view>
+      <%= yield %>
+    </div>
   </body>
 </html>

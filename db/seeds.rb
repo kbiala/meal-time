@@ -5,3 +5,8 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+Order.create(name: 'order1')
+Order.create(name: 'order2')
+Order.create(name: 'order3')
+Order.create(name: 'order4')

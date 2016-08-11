@@ -1,0 +1,16 @@
+<h1>MealTime</h1>
+
+<div ng-controller="MealTimeCtrl">
+  <h2>New order</h2>
+
+  <form ng-submit="addOrder()">
+    <input type="text" ng-model="newOrder.name">
+    <input type="submit" value="Add">
+  </form>
+
+  <ul>
+    <li ng-repeat="order in orders">
+      {{ order.name }}
+    </li>
+  </ul>
+</div>
