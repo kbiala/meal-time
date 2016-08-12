@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :orders, defaults: { format: 'json' } do
+  resources :orders do
     resources :meals
   end
   root 'meal_time#index'
