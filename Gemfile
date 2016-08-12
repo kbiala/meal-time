@@ -31,6 +31,8 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 
 gem 'angularjs-rails'
+gem 'angular-rails-templates'
+gem 'angular-ui-router-rails'
 gem 'responders'
 
 group :development, :test do
