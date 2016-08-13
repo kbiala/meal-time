@@ -1,3 +1,4 @@
+<button ui-sref="orders.index">Back</button>
 <ul>
   <li>Name: {{ order.name }}</li>
   <li>Status: {{ order.status }}</li>
@@ -14,4 +15,10 @@
     <option value="Delivered">Delivered</option>
   </select>
   <input type="submit" value="Save">
+</form>
+
+<form ng-submit="addMeal()">
+  Name: <input type="text" ng-model="newMeal.name">
+  Price: <input type="text" ng-model="newMeal.price">
+  <input type="submit" value="Add your meal">
 </form>

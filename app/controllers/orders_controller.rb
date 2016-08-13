@@ -40,7 +40,7 @@ class OrdersController < ApplicationController
     begin
       Order.destroy(params[:id])
     rescue ActiveRecord::RecordNotFound
-      render status: :not_found, json: {'error': 'bad id given'}
+      render status: :not_found, json: { 'error': 'bad id given' }
       return
     end
     render status: :no_content, json: {}

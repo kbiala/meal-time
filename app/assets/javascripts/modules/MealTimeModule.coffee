@@ -22,3 +22,8 @@ app.factory "orderResource", ($resource) ->
   $resource("/orders/:id", {}, {
     update: {method: "PUT"}
   })
+
+app.factory "mealResource", ($resource) ->
+  $resource("/orders/:order_id/meals/:id", {}, {
+    update: {method: "PUT"}
+  })
