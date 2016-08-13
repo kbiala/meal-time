@@ -1,5 +1,5 @@
 class OrderSerializer < ActiveModel::Serializer
-  attributes :id, :name
+  attributes :id, :name, :status
 
   has_many :meals
 

@@ -19,4 +19,6 @@ app.config ($stateProvider) ->
       controller: 'OrdersShowCtrl'
 
 app.factory "orderResource", ($resource) ->
-  $resource("/orders/:id", {}, {update: {method: "PUT"}})
+  $resource("/orders/:id", {}, {
+    update: {method: "PUT"}
+  })

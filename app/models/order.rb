@@ -1,5 +1,5 @@
 class Order < ApplicationRecord
-  has_many :meals
+  has_many :meals, dependent: :destroy
 
   validates_presence_of :name, :status
   validates :status, inclusion: {
