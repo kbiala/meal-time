@@ -3,21 +3,29 @@
   <li>Name: {{ order.name }}</li>
   <li>Status: {{ order.status }}</li>
   <li>Creation date: {{ order.created_at }}</li>
-  <li>Order meals: {{ order.meals }}</li>
 </ul>
-{{ order }}
 
-<form ng-submit="updateOrder()">
-  <select name="status" ng-model="newStatus">
-    <option value="New">New</option>
-    <option value="Finalized">Finalized</option>
-    <option value="Ordered">Ordered</option>
-    <option value="Delivered">Delivered</option>
-  </select>
-  <input type="submit" value="Save">
-</form>
+<table>
+  <thead>
+    <tr>
+      <th>Meal Name:</th>
+      <th>Price:</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="meal in order.meals">
+      <td>{{ meal.name }}</td>
+      <td>{{ meal.price }}</td>
+    </tr>
+  </tbody>
+</table>
 
-<form ng-submit="addMeal()">
+<button ng-click="updateOrder('Finalized')" ng-hide="order.status!='New'">Finalize order</button>
+<button ng-click="updateOrder('Ordered')" ng-hide="order.status!='Finalized'">Mark as ordered</button>
+<button ng-click="updateOrder('Delivered')" ng-hide="order.status!='Ordered'">Mark as delivered</button>
+<button ng-hide="order.status!='Delivered'" disabled="true">Delivered</button>
+
+<form ng-submit="addMeal()" ng-hide="order.status!='New'">
   Name: <input type="text" ng-model="newMeal.name">
   Price: <input type="text" ng-model="newMeal.price">
   <input type="submit" value="Add your meal">

@@ -2,7 +2,12 @@ class MealsController < ApplicationController
   def create
     begin
       order = Order.find(params['order_id'])
-      meal = Meal.create!(order: order, name: meal_params['name'], price: meal_params['price'])
+      if order.status == 'New'
+        meal = Meal.create!(order: order, name: meal_params['name'], price: meal_params['price'])
+      else
+        render status: :bad_request, json: { 'error': 'cannot add meals to a finalized order' }
+        return
+      end
     rescue ActiveRecord::RecordNotFound
       render status: :not_found, json: { 'error': 'bad id given' }
       return

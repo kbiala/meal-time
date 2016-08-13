@@ -29,13 +29,24 @@ RSpec.describe "Meals API", type: :request do
     end
 
     it 'returns not found when invalid order id given' do
-
       create(:order)
       expect {
         post "/orders/999/meals", params: { meal: { name: 'new_meal', price: 10 } }
       }.to change(Meal, :count).by(0)
 
       expect(response).to have_http_status(404)
+    end
+
+    it 'returns bad request when order is finalized' do
+      order = create(:order)
+      order.status = 'Finalized'
+      order.save!
+
+      expect {
+        post "/orders/#{order.id}/meals", params: { meal: { name: 'new_meal', price: 10 } }
+      }.to change(Meal, :count).by(0)
+
+      expect(response).to have_http_status(400)
     end
   end
 
