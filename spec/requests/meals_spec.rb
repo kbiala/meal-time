@@ -4,9 +4,10 @@ RSpec.describe "Meals API", type: :request do
   describe '/orders/:order_id/meals POST' do
     it 'successfully creates a meal' do
       order = create(:order)
+      user = create(:user)
 
       expect {
-        post "/orders/#{order.id}/meals", params: { meal: { name: 'new_meal', price: 10 } }
+        post "/orders/#{order.id}/meals", params: { meal: { name: 'new_meal', price: 10, user_id: user.id } }
       }.to change(Meal, :count).by(1)
 
       expect(response).to have_http_status(201)
@@ -14,15 +15,16 @@ RSpec.describe "Meals API", type: :request do
 
     it 'returns bad request when invalid params given' do
       order = create(:order)
+      user = create(:user)
 
       expect {
-        post "/orders/#{order.id}/meals", params: {}
+        post "/orders/#{order.id}/meals", params: { meal: { user_id: user.id } }
       }.to change(Meal, :count).by(0)
 
       expect(response).to have_http_status(400)
 
       expect {
-        post "/orders/#{order.id}/meals", params: { meal: { bad_key: 'value' } }
+        post "/orders/#{order.id}/meals", params: { meal: { bad_key: 'value', user_id: user.id } }
       }.to change(Meal, :count).by(0)
 
       expect(response).to have_http_status(400)
@@ -30,8 +32,9 @@ RSpec.describe "Meals API", type: :request do
 
     it 'returns not found when invalid order id given' do
       create(:order)
+      user = create(:user)
       expect {
-        post "/orders/999/meals", params: { meal: { name: 'new_meal', price: 10 } }
+        post "/orders/999/meals", params: { meal: { name: 'new_meal', price: 10, user_id: user.id } }
       }.to change(Meal, :count).by(0)
 
       expect(response).to have_http_status(404)
@@ -41,9 +44,10 @@ RSpec.describe "Meals API", type: :request do
       order = create(:order)
       order.status = 'Finalized'
       order.save!
+      user = create(:user)
 
       expect {
-        post "/orders/#{order.id}/meals", params: { meal: { name: 'new_meal', price: 10 } }
+        post "/orders/#{order.id}/meals", params: { meal: { name: 'new_meal', price: 10, user_id: user.id } }
       }.to change(Meal, :count).by(0)
 
       expect(response).to have_http_status(400)
@@ -61,6 +65,7 @@ RSpec.describe "Meals API", type: :request do
       expect(new_meal['name']).to eq(meal.name)
       expect(new_meal['price']).to eq(meal.price)
       expect(new_meal['order_id']).to eq(meal.order.id)
+      expect(new_meal['user_id']).to eq(meal.user.id)
     end
 
     it 'returns not found when bad id given' do
@@ -77,7 +82,7 @@ RSpec.describe "Meals API", type: :request do
 
       expect {
         delete "/orders/#{meal.order.id}/meals/#{meal.id}"
-      }.to change(Meal, :count).by(-1)
+      }.to change(Meal, :count).by(-1).and change(User, :count).by(0).and change(Order, :count).by(0)
 
       expect(response).to have_http_status(204)
     end

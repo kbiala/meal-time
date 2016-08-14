@@ -36,12 +36,17 @@ gem 'angular-ui-router-rails'
 gem 'responders'
 
 gem 'active_model_serializers'
+gem 'omniauth-facebook'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
   gem 'rspec-rails'
   gem 'factory_girl_rails'
+  gem 'guard'
+  gem 'guard-annotate'
+  gem 'guard-rspec'
+  gem 'guard-rails'
   gem 'dotenv-rails'
 end
 

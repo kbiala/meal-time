@@ -18,7 +18,6 @@
 //= require angular-rails-templates
 //= require angular-ui-router
 //= require turbolinks
-// Templates in app/assets/javascript/templates
 //= require_tree ./modules
 //= require_tree ./controllers
 //= require_tree ./templates

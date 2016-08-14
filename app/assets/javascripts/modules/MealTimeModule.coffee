@@ -6,6 +6,7 @@ app.config ($stateProvider) ->
       url: ''
       templateUrl: 'index.html'
     .state 'orders',
+      parent: 'root'
       url: '/orders'
       template: "<ui-view/>"
       abstract: true

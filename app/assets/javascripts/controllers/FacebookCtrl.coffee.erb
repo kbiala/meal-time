@@ -1,0 +1,41 @@
+angular.module('MealTimeModule').controller("FacebookCtrl", ($scope) ->
+  $scope.facebook_login = ->
+    FB.login (response) ->
+      if response.authResponse
+        accessToken = FB.getAuthResponse()
+        $scope.$apply ->
+          $scope.loggedIn = true
+      else
+        console.log "login failed"
+
+  $scope.facebook_logout = ->
+    FB.logout (response) ->
+      $scope.$apply ->
+        $scope.loggedIn = false
+
+  $scope.updateUserLoggedIn = ->
+    FB.getLoginStatus (response) ->
+      $scope.$apply ->
+        $scope.loggedIn = response.status == "connected"
+
+  window.fbAsyncInit = ->
+    FB.init
+      appId: <%= ENV['FACEBOOK_KEY'] %>
+      xfbml: true
+      version: 'v2.7'
+      cookie: true
+
+    $scope.updateUserLoggedIn()
+
+  ((d, s, id) ->
+    js = undefined
+    fjs = d.getElementsByTagName(s)[0]
+    if d.getElementById(id)
+      return
+    js = d.createElement(s)
+    js.id = id
+    js.src = '//connect.facebook.net/en_US/sdk.js'
+    fjs.parentNode.insertBefore js, fjs
+    return
+  ) document, 'script', 'facebook-jssdk'
+)

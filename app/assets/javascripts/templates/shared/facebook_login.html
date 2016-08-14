@@ -1,0 +1,10 @@
+<div ng-controller="FacebookCtrl">
+  Logged_in:
+  {{ loggedIn }}
+  <div ng-if="!loggedIn">
+    <button ng-click="facebook_login();">Facebook login</button>
+  </div>
+  <div ng-if="loggedIn">
+    <button ng-click="facebook_logout();">Facebook logout</button>
+  </div>
+</div>

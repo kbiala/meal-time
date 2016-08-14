@@ -2,8 +2,9 @@ class MealsController < ApplicationController
   def create
     begin
       order = Order.find(params['order_id'])
+      user = User.find(meal_params['user_id'])
       if order.status == 'New'
-        meal = Meal.create!(order: order, name: meal_params['name'], price: meal_params['price'])
+        meal = Meal.create!(order: order, user: user, name: meal_params['name'], price: meal_params['price'])
       else
         render status: :bad_request, json: { 'error': 'cannot add meals to a finalized order' }
         return
@@ -41,6 +42,6 @@ class MealsController < ApplicationController
   private
 
   def meal_params
-    params.require(:meal).permit(:name, :price)
+    params.require(:meal).permit(:name, :price, :user_id)
   end
 end
