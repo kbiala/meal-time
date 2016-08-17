@@ -11,14 +11,25 @@ FactoryGirl.define do
     "user#{n}"
   end
 
+  sequence :facebook_id do |n|
+    "1234#{n}".to_i
+  end
+
   factory :order do
     name { generate(:order_name) }
     status 'New'
   end
 
-  factory :user do
+  factory :user_with_facebook, class: User, aliases: [:user] do
     name { generate(:user_name) }
-    facebook_id 1
+    facebook_id { generate(:facebook_id) }
+    access_token 'asdf'
+  end
+
+  factory :user_with_github, class: User do
+    name { generate(:user_name) }
+    github_id 1
+    access_token 'asdf'
   end
 
   factory :meal do

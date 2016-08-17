@@ -1,4 +1,6 @@
 class OrdersController < ApplicationController
+  before_action :authenticate_with_token
+
   def index
     render status: :ok, json: Order.all
   end
@@ -6,8 +8,8 @@ class OrdersController < ApplicationController
   def create
     begin
       order = Order.create!(order_params)
-    rescue ActionController::ParameterMissing
-      render status: :bad_request, json: {'error': 'bad params'}
+    rescue ActionController::ParameterMissing, ActiveRecord::RecordInvalid => e
+      render status: :bad_request, json: {'error': e.message}
       return
     end
     render status: :created, json: order

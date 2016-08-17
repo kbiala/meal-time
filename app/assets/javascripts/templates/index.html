@@ -1,4 +1,9 @@
-<div ng-include='"shared/facebook_login.html"'></div>
+<div ng-if="!$root.githubLoggedIn">
+  <div ng-include='"shared/facebook_login.html"'></div>
+</div>
+<div ng-if="!$root.facebookLoggedIn">
+  <div ng-include='"shared/github_login.html"'></div>
+</div>
 <h1>Index</h1>
 <a ui-sref="orders.index">New order</a>
 <div ui-view></div>

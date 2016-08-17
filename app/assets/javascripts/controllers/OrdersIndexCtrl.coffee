@@ -1,8 +1,13 @@
 angular.module('MealTimeModule').controller("OrdersIndexCtrl", ($scope, orderResource) ->
-  $scope.orders = orderResource.query()
+  $scope.orders = orderResource.query({access_token: $scope.currentToken()}, (->), ->
+    $scope.loginAlert()
+  )
 
   $scope.addOrder = ->
-    order = orderResource.save($scope.newOrder)
-    $scope.orders.push(order)
+    order = orderResource.save({order: $scope.newOrder, access_token: $scope.currentToken()}, ->
+      $scope.orders.push(order)
+    , ->
+      $scope.loginAlert()
+    )
     $scope.newOrder = {}
 )

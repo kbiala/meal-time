@@ -18,6 +18,7 @@
 //= require angular-rails-templates
 //= require angular-ui-router
 //= require turbolinks
+//= require satellizer
 //= require_tree ./modules
 //= require_tree ./controllers
 //= require_tree ./templates

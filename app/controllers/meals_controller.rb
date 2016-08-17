@@ -1,19 +1,15 @@
 class MealsController < ApplicationController
+  before_action :authenticate_with_token
+
   def create
     begin
       order = Order.find(params['order_id'])
-      user = User.find(meal_params['user_id'])
-      if order.status == 'New'
-        meal = Meal.create!(order: order, user: user, name: meal_params['name'], price: meal_params['price'])
-      else
-        render status: :bad_request, json: { 'error': 'cannot add meals to a finalized order' }
-        return
-      end
-    rescue ActiveRecord::RecordNotFound
-      render status: :not_found, json: { 'error': 'bad id given' }
+      meal = Meal.create!(order: order, user: current_user, name: meal_params['name'], price: meal_params['price'])
+    rescue ActiveRecord::RecordNotFound => e
+      render status: :not_found, json: { 'error': e.message }
       return
-    rescue ActionController::ParameterMissing, ActiveRecord::RecordInvalid
-      render status: :bad_request, json: { 'error': 'bad params' }
+    rescue ActionController::ParameterMissing, ActiveRecord::RecordInvalid => e
+      render status: :bad_request, json: { 'error': e.message }
       return
     end
     render status: :created, json: meal

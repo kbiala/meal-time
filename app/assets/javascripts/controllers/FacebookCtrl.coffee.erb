@@ -1,22 +1,33 @@
-angular.module('MealTimeModule').controller("FacebookCtrl", ($scope) ->
-  $scope.facebook_login = ->
+angular.module('MealTimeModule').controller("FacebookCtrl", ($rootScope, $scope, $http) ->
+
+  $scope.facebookLogin = ->
     FB.login (response) ->
       if response.authResponse
-        accessToken = FB.getAuthResponse()
-        $scope.$apply ->
-          $scope.loggedIn = true
+        $http({
+          method: 'GET'
+          url: '/auth/facebook/callback'
+        }).then (response) ->
+          localStorage.facebook_token = response.data.access_token
+          $rootScope.facebookLoggedIn = true
+          $rootScope.facebookName = response.data.name
+          return
+        , (response) ->
+          console.log "failure"
+          return
       else
         console.log "login failed"
 
-  $scope.facebook_logout = ->
+  $scope.facebookLogout = ->
     FB.logout (response) ->
       $scope.$apply ->
-        $scope.loggedIn = false
+        localStorage.removeItem('facebook_token')
+        $rootScope.facebookLoggedIn = false
+        $rootScope.facebookName = ''
 
-  $scope.updateUserLoggedIn = ->
+  $scope.updateFacebookLoggedIn = ->
     FB.getLoginStatus (response) ->
       $scope.$apply ->
-        $scope.loggedIn = response.status == "connected"
+        $rootScope.facebookLoggedIn = response.status == "connected"
 
   window.fbAsyncInit = ->
     FB.init
@@ -25,7 +36,7 @@ angular.module('MealTimeModule').controller("FacebookCtrl", ($scope) ->
       version: 'v2.7'
       cookie: true
 
-    $scope.updateUserLoggedIn()
+    $scope.updateFacebookLoggedIn()
 
   ((d, s, id) ->
     js = undefined

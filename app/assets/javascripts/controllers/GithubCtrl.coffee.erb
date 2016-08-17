@@ -1,0 +1,23 @@
+angular.module('MealTimeModule').controller("GithubCtrl", ($rootScope, $scope, $auth, $http) ->
+  $scope.updateGithubLoggedIn = ->
+    $rootScope.githubLoggedIn = $auth.isAuthenticated()
+
+  $scope.authenticate = (provider) ->
+    $auth.authenticate(provider).then (response) ->
+      console.log response
+      $scope.githubName = response.data.name
+      $auth.setToken(response.data.access_token)
+      $scope.updateGithubLoggedIn()
+    , (response) ->
+      console.log "failure"
+      console.log response
+
+  $scope.githubLogout = ->
+    $auth.logout().then (response) ->
+      console.log "success"
+      $scope.updateGithubLoggedIn()
+    , (response) ->
+      console.log "failure"
+
+  $scope.updateGithubLoggedIn()
+)

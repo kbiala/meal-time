@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160813210100) do
+ActiveRecord::Schema.define(version: 20160816152105) do
 
   create_table "meals", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name",       null: false
@@ -31,10 +31,13 @@ ActiveRecord::Schema.define(version: 20160813210100) do
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.text     "name",        limit: 65535
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
-    t.integer  "facebook_id"
+    t.text     "name",         limit: 65535
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.bigint   "facebook_id"
+    t.string   "access_token"
+    t.integer  "token_expire"
+    t.bigint   "github_id"
   end
 
   add_foreign_key "meals", "orders"
