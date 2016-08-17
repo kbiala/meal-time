@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
     elsif (params[:provider] == 'github')
       user = User.from_github(params[:code])
     end
-    render status: :created, json: { name: user.name, access_token: user.access_token }
+    render status: :created, json: user, Serializer: UserSerializer
   end
 
   def destroy
