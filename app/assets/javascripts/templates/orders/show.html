@@ -12,7 +12,7 @@
       <th>Price:</th>
     </tr>
   </thead>
-  <tbody>
+  <tbody id="order-meals">
     <tr ng-repeat="meal in order.meals">
       <td>{{ meal.name }}</td>
       <td>{{ meal.price }}</td>
@@ -27,7 +27,7 @@
 <button ng-hide="order.status!='Delivered'" disabled="true">Delivered</button>
 
 <form ng-submit="addMeal()" ng-hide="order.status!='New'">
-  Name: <input type="text" ng-model="newMeal.name">
-  Price: <input type="text" ng-model="newMeal.price">
+  Name: <input type="text" name="name" ng-model="newMeal.name">
+  Price: <input type="text" name="price" ng-model="newMeal.price">
   <input type="submit" value="Add your meal">
 </form>
