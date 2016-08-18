@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :authenticate_with_token
+  before_action :authenticate_with_token, except: [:index]
 
   def index
     render status: :ok, json: Order.all

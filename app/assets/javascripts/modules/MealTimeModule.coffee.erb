@@ -11,10 +11,6 @@ app.config ($stateProvider, $authProvider) ->
       url: '/orders'
       template: "<ui-view/>"
       abstract: true
-    .state 'orders.index',
-      url: '/'
-      templateUrl: 'orders/index.html'
-      controller: 'OrdersIndexCtrl'
     .state 'orders.show',
       url: '/:id'
       templateUrl: 'orders/show.html'
@@ -33,6 +29,3 @@ app.factory "mealResource", ($resource) ->
   $resource("/orders/:order_id/meals/:id", {}, {
     update: {method: "PUT"}
   })
-
-app.factory "userResource", ($resource) ->
-  $resource("/sessions/:session_id", {}, {})

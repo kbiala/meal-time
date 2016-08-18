@@ -7,18 +7,12 @@ RSpec.describe "Orders API", type: :request do
     it 'successfully returns orders' do
       create_list(:order, 3)
 
-      get '/orders', params: { access_token: current_user.access_token }
+      get '/orders'
 
       orders = JSON.parse(response.body)
 
       expect(response).to be_success
       expect(orders.count).to eq(3)
-    end
-
-    it 'returns unauthorized when invalid token given' do
-      get '/orders'
-
-      expect(response).to have_http_status(401)
     end
   end
 

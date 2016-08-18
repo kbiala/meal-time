@@ -21,6 +21,9 @@ angular.module('MealTimeModule').controller("MealTimeCtrl", ($rootScope, $scope,
   $scope.loginAlert = ->
     alert("Please log in to continue")
 
+  $scope.unknownError = ->
+    alert("There was an error when processing your request")
+
   if (token = $scope.currentToken()) != null
     $scope.authorize(token)
 )

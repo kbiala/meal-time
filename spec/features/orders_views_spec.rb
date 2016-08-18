@@ -9,22 +9,33 @@ RSpec.describe "Orders views", type: :feature do
     @meal = Meal.create!(name: "meal1", price: "10", order: @order, user: meal_user)
   end
 
-  scenario 'order link clicked when unauthorized' do
+  scenario 'new order clicked when unauthorized' do
     visit '/'
     alert = accept_alert do
-      click_link('New order')
+      click_button('Add')
     end
 
     expect(alert).to eq("Please log in to continue")
   end
 
+  scenario 'new order clicked with no name given' do
+    visit '/'
+    page.execute_script("localStorage.facebook_token = '#{@user.access_token}'")
+    alert = accept_alert do
+      click_button('Add')
+    end
+
+    expect(alert).not_to be_empty
+  end
+
   scenario 'order link clicked when authorized' do
     visit '/'
     page.execute_script("localStorage.facebook_token = '#{@user.access_token}'")
-    click_link('New order')
+    list = find('#active-orders-list').all('li')
+    fill_in("order-name-field", with: "new_order")
+    click_button('Add')
 
-    list = find('#orders-list').all('li')
-    expect(list.count).to be >= 1
+    expect(find('#active-orders-list').all('li').count).to eq(list.count + 1)
   end
 
   scenario 'an order was clicked' do
@@ -40,6 +51,7 @@ RSpec.describe "Orders views", type: :feature do
   scenario 'adding meal to an order and updating its status' do
     visit '/'
     page.execute_script("localStorage.facebook_token = '#{@user.access_token}'")
+
     visit "/#/orders/#{@order.id}"
     order_meals = find("#order-meals").all("tr")
     fill_in "name", with: "new_meal"
@@ -51,8 +63,18 @@ RSpec.describe "Orders views", type: :feature do
     expect(page).to have_button("Mark as ordered")
     click_button "Mark as ordered"
     expect(page).to have_button("Mark as delivered")
+
+    active_orders_count = find('#active-orders-list').all('li').count
+    click_link "History"
+    delivered_orders_count = find('#delivered-orders-list').all('li').count
+
     click_button "Mark as delivered"
     expect(page).to have_button('Delivered', disabled: true)
+
+    click_link "Active"
+    expect(find('#active-orders-list').all('li').count).to eq(active_orders_count - 1)
+    click_link "History"
+    expect(find('#delivered-orders-list').all('li').count).to eq(delivered_orders_count + 1)
   end
 
   scenario 'trying to add two meals to an order' do

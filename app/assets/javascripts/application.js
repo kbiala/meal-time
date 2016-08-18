@@ -19,6 +19,7 @@
 //= require angular-ui-router
 //= require turbolinks
 //= require satellizer
+//= require bootstrap-sprockets
 //= require_tree ./modules
 //= require_tree ./controllers
 //= require_tree ./templates

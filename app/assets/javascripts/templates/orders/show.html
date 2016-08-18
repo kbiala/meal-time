@@ -1,15 +1,21 @@
-<button ui-sref="orders.index">Back</button>
+<button class="btn btn-default" id="back-btn" ui-sref="root">Close</button>
 <ul>
   <li>Name: {{ order.name }}</li>
   <li>Status: {{ order.status }}</li>
   <li>Creation date: {{ order.created_at }}</li>
 </ul>
 
-<table>
+<button class="btn btn-info status-button" ng-click="updateOrder('Finalized')" ng-hide="order.status!='New'">Finalize order</button>
+<button class="btn btn-info status-button" ng-click="updateOrder('Ordered')" ng-hide="order.status!='Finalized'">Mark as ordered</button>
+<button class="btn btn-info status-button" ng-click="updateOrder('Delivered')" ng-hide="order.status!='Ordered'">Mark as delivered</button>
+<button class="btn btn-info status-button" ng-hide="order.status!='Delivered'" disabled="disabled">Delivered</button>
+
+<table class="table">
   <thead>
     <tr>
       <th>Meal Name:</th>
       <th>Price:</th>
+      <th>Added by:</th>
     </tr>
   </thead>
   <tbody id="order-meals">
@@ -21,13 +27,17 @@
   </tbody>
 </table>
 
-<button ng-click="updateOrder('Finalized')" ng-hide="order.status!='New'">Finalize order</button>
-<button ng-click="updateOrder('Ordered')" ng-hide="order.status!='Finalized'">Mark as ordered</button>
-<button ng-click="updateOrder('Delivered')" ng-hide="order.status!='Ordered'">Mark as delivered</button>
-<button ng-hide="order.status!='Delivered'" disabled="true">Delivered</button>
-
-<form ng-submit="addMeal()" ng-hide="order.status!='New'">
-  Name: <input type="text" name="name" ng-model="newMeal.name">
-  Price: <input type="text" name="price" ng-model="newMeal.price">
-  <input type="submit" value="Add your meal">
+<form class="form-inline" ng-submit="addMeal()" ng-hide="order.status!='New'">
+  <div class="form-group">
+    <label for="newmeal-name">Name:</label>
+    <input id="newmeal-name" type="text" name="name" ng-model="newMeal.name" />
+  </div>
+  <div class="form-group">
+    <label for="newmeal-price">Price:</label>
+    <input id="newmeal-price" type="text" name="price" ng-model="newMeal.price" />
+  </div>
+  <div class="form-group">
+    <input type="submit" value="Add your meal">
+  </div>
 </form>
+<div id="footer"></div>

@@ -1,13 +1,16 @@
-angular.module('MealTimeModule').controller("OrdersIndexCtrl", ($scope, orderResource) ->
-  $scope.orders = orderResource.query({access_token: $scope.currentToken()}, (->), ->
-    $scope.loginAlert()
-  )
+angular.module('MealTimeModule').controller("OrdersIndexCtrl", ($scope, $rootScope, orderResource) ->
+  saveOrdersToScope = (orders) ->
+    getActiveOrders = ->
+      orders.filter (order) ->
+        order.status != "Delivered"
+    getDeliveredOrders = ->
+      orders.filter (order) ->
+        order.status == "Delivered"
+    $rootScope.activeOrders = getActiveOrders()
+    $rootScope.deliveredOrders = getDeliveredOrders()
 
-  $scope.addOrder = ->
-    order = orderResource.save({order: $scope.newOrder, access_token: $scope.currentToken()}, ->
-      $scope.orders.push(order)
-    , ->
-      $scope.loginAlert()
-    )
-    $scope.newOrder = {}
+  $scope.setCurrentOrder = (order) ->
+    $rootScope.currentOrder = order
+
+  orderResource.query({}, (response) -> saveOrdersToScope(response))
 )
