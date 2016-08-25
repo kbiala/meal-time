@@ -1,5 +1,4 @@
 angular.module('MealTimeModule').controller("FacebookCtrl", ($rootScope, $scope, $http) ->
-
   $scope.facebookLogin = ->
     FB.login (response) ->
       if response.authResponse
@@ -31,7 +30,7 @@ angular.module('MealTimeModule').controller("FacebookCtrl", ($rootScope, $scope,
 
   window.fbAsyncInit = ->
     FB.init
-      appId: <%= ENV['FACEBOOK_KEY'] %>
+      appId: "<%= ENV['FACEBOOK_KEY'] %>"
       xfbml: true
       version: 'v2.7'
       cookie: true
