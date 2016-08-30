@@ -4,12 +4,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    begin
-      user = User.find(params[:id])
-    rescue ActiveRecord::RecordNotFound
-      render status: :not_found, json: {}
-      return
-    end
+    user = User.find(params[:id])
     render status: :ok, json: user
   end
 

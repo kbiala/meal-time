@@ -6,45 +6,22 @@ class OrdersController < ApplicationController
   end
 
   def create
-    begin
-      order = Order.create!(order_params)
-    rescue ActionController::ParameterMissing, ActiveRecord::RecordInvalid => e
-      render status: :bad_request, json: {'error': e.message}
-      return
-    end
+    order = Order.create!(order_params)
     render status: :created, json: order
   end
 
   def show
-    begin
-      order = Order.find(params[:id])
-    rescue ActiveRecord::RecordNotFound
-      render status: :not_found, json: {'error': 'bad id given'}
-      return
-    end
+    order = Order.find(params[:id])
     render status: :ok, json: order
   end
 
   def update
-    begin
-      order = Order.update(params[:id], order_params)
-    rescue ActiveRecord::RecordNotFound
-      render status: :not_found, json: {'error': 'bad id given'}
-      return
-    rescue ActionController::ParameterMissing
-      render status: :bad_request, json: {'error': 'bad or no params given'}
-      return
-    end
+    order = Order.update(params[:id], order_params)
     render status: :ok, json: order
   end
 
   def destroy
-    begin
-      Order.destroy(params[:id])
-    rescue ActiveRecord::RecordNotFound
-      render status: :not_found, json: { 'error': 'bad id given' }
-      return
-    end
+    Order.destroy(params[:id])
     render status: :no_content, json: {}
   end
 
