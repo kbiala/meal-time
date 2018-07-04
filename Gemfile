@@ -15,7 +15,7 @@ gem 'turbolinks'
 gem 'jbuilder'
 
 # angularjs
-gem 'angularjs-rails', '~> 1.6.0'
+gem 'angularjs-rails', '~> 1.5.0'
 gem 'angular-rails-templates', git: 'https://github.com/pitr/angular-rails-templates.git'
 gem 'angular-ui-router-rails', '~> 0.2.0'
 

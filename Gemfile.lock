@@ -55,7 +55,7 @@ GEM
     addressable (2.5.2)
       public_suffix (>= 2.0.2, < 4.0)
     angular-ui-router-rails (0.2.15)
-    angularjs-rails (1.6.8)
+    angularjs-rails (1.5.6)
     annotate (2.7.4)
       activerecord (>= 3.2, < 6.0)
       rake (>= 10.4, < 13.0)
@@ -303,7 +303,7 @@ DEPENDENCIES
   active_model_serializers
   angular-rails-templates!
   angular-ui-router-rails (~> 0.2.0)
-  angularjs-rails (~> 1.6.0)
+  angularjs-rails (~> 1.5.0)
   bootstrap-sass (~> 3.3.0)
   byebug
   capybara
