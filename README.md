@@ -14,3 +14,6 @@ as well as the frontend. Gem **dotenv-rails** is used for loading these variable
 them to be stored in `.env` file in the root path of the project.
 For security reasons this file is not added to this repository and thus must be provided
 manually. You can use `.env.example` file to build your own `.env` file.
+
+## Deployment
+App is deployed using Heroku. You can check it out under this link https://alluring-crater-lake-46913.herokuapp.com/
