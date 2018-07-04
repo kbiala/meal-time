@@ -17,7 +17,7 @@ app.config ($stateProvider, $authProvider) ->
       controller: 'OrdersShowCtrl'
 
   $authProvider.github {
-    clientId: "<%= ENV['GITHUB_KEY'] %>"
+    clientId: "94d05ea5fcb07e58242b"
   }
 
 app.factory "orderResource", ($resource) ->
