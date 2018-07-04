@@ -15,7 +15,7 @@ class Meal < ApplicationRecord
   belongs_to :order
   belongs_to :user
 
-  validates_presence_of :name, :price, :user
+  validates_presence_of :name, :price, :user, :order
   validate :user_has_meal?, :order_is_new?
 
   def order_is_new?

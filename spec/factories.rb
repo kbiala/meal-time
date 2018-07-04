@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   sequence :order_name do |n|
     "order#{n}"
   end
