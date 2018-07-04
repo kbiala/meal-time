@@ -1,5 +1,4 @@
 angular.module('MealTimeModule').controller("OrdersShowCtrl", ($scope, $rootScope, $stateParams, orderResource, mealResource) ->
-  $scope.statuses = ['New', 'Finalized', 'Ordered', 'Delivered']
   $scope.order = orderResource.get({id: $stateParams.id, access_token: $scope.currentToken()}, (->), (response) ->
     if response.status == 401
       $scope.loginAlert()
