@@ -11,14 +11,14 @@
     <div class="tab-content">
       <div role="tabpanel" class="tab-pane active" id="active">
         <ul id="active-orders-list">
-          <li ng-repeat="order in activeOrders">
+          <li class="order-list" ng-repeat="order in activeOrders">
             <a ui-sref="orders.show({id: order.id})" ng-click="setCurrentOrder(order)">{{ order.name }}</a>
           </li>
         </ul>
       </div>
       <div role="tabpanel" class="tab-pane" id="history">
         <ul id="delivered-orders-list">
-          <li ng-repeat="order in deliveredOrders">
+          <li class="order-list" ng-repeat="order in deliveredOrders">
             <a ui-sref="orders.show({id: order.id})">{{ order.name }}</a>
           </li>
         </ul>
