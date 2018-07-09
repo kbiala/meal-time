@@ -16,17 +16,11 @@ class Meal < ApplicationRecord
   belongs_to :user
 
   validates_presence_of :name, :price, :user, :order
-  validate :user_has_meal?, :order_is_new?
+  validate :order_is_new?
 
   def order_is_new?
     if order.status != "New"
       errors.add(:order, 'has been finalized; cannot add new meals')
-    end
-  end
-
-  def user_has_meal?
-    unless user.orders.where(id: order.id).empty?
-      errors.add(:user, 'already has a meal in this order')
     end
   end
 end

@@ -18,9 +18,9 @@ class User < ApplicationRecord
 
   validates_presence_of :name, :access_token
   validates_uniqueness_of :facebook_id, :github_id, allow_blank: true
-  validate :facebook_or_github
+  validate :facebook_or_github_present
 
-  def facebook_or_github
+  def facebook_or_github_present
     unless facebook_id || github_id
       errors.add(:facebook_id, "at least one token must be present")
     end
@@ -29,7 +29,7 @@ class User < ApplicationRecord
   def self.from_omniauth(omniauth_hash)
     User.create_with(name: omniauth_hash.info.name, access_token: omniauth_hash.credentials.token,
                      token_expire: omniauth_hash.credentials.expires_at)
-         .find_or_create_by(facebook_id: omniauth_hash.uid)
+        .find_or_create_by(facebook_id: omniauth_hash.uid)
   end
 
   def self.from_github(code)
