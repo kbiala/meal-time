@@ -1,12 +1,10 @@
-<div ng-controller="OrdersNewCtrl">
-  <h3 id="new-order-title" class="text-center">Add an order</h3>
-  <form class="form-horizontal" ng-submit="addOrder()">
-    <div class="form-group">
-      <input class="align-center" id="order-name-field" type="text"
-      ng-model="newOrder.name" placeholder="Your order name" />
-    </div>
-    <div class="form-group">
-      <input class="btn btn-danger align-center" id="add-order-btn" type="submit" value="Add" />
-    </div>
-  </form>
-</div>
+<h3 id="new-order-title" class="text-center">Add an order</h3>
+<form class="form-horizontal" ng-submit="addOrder()">
+  <div class="form-group">
+    <input class="align-center" id="order-name-field" type="text"
+    ng-model="newOrder.name" placeholder="Your order name" />
+  </div>
+  <div class="form-group">
+    <input class="btn btn-danger align-center" id="add-order-btn" type="submit" value="Add" />
+  </div>
+</form>

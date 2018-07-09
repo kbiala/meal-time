@@ -1,8 +1,8 @@
 <div ng-controller="GithubCtrl">
   <div ng-if="!githubLoggedIn">
-    <button class="btn btn-md btn-success navbar-btn" ng-click="authenticate('github')">Github login</button>
+    <button class="button alt github-btn navbar-btn" ng-click="authenticate('github')">Github login</button>
   </div>
   <div ng-if="githubLoggedIn">
-    <button class="btn btn-md btn-success navbar-btn" ng-click="githubLogout()">Logout {{ githubName }}</button>
+    <button class="button special navbar-btn" ng-click="githubLogout()">Logout {{ githubName }}</button>
   </div>
 </div>

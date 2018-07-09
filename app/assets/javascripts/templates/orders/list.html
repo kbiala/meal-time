@@ -1,0 +1,50 @@
+<section id="one" class="wrapper">
+  <div class="inner split">
+    <section>
+      <div ng-controller="OrdersNewCtrl">
+        <section>
+          <h2 id="new-order-title">Add an order</h2>
+          <p>Please put a name of your order in the box below</p>
+          <form class="alt" ng-submit="addOrder()">
+            <div class="row uniform">
+              <div class="6u 12u$(xsmall)">
+                <input name="name" id="order-name-field" placeholder="Name" type="text" ng-model="newOrder.name">
+              </div>
+            </div>
+            <ul class="actions">
+              <li><input class="alt" id="add-order-btn" value="Add" type="submit"></li>
+            </ul>
+          </form>
+        </section>
+      </div>
+    </section>
+    <section>
+      <div ng-controller="OrdersIndexCtrl">
+        <ul class="nav nav-tabs" role="tablist">
+          <li role="presentation" class="active">
+            <a href="#active" aria-controls="active" role="tab" data-toggle="tab">Active orders</a>
+          </li>
+          <li role="presentation">
+            <a href="#history" aria-controls="history" role="tab" data-toggle="tab">Older orders</a>
+          </li>
+        </ul>
+        <div class="tab-content">
+          <div role="tabpanel" class="tab-pane active" id="active">
+            <ul class="contact" id="active-orders-list">
+              <li ng-repeat="order in activeOrders">
+                <a ui-sref="orders.show({id: order.id})" ng-click="setCurrentOrder(order)">{{ order.name }}</a>
+              </li>
+            </ul>
+          </div>
+          <div role="tabpanel" class="tab-pane" id="history">
+            <ul class="contact" id="delivered-orders-list">
+              <li ng-repeat="order in deliveredOrders">
+                <a ui-sref="orders.show({id: order.id})">{{ order.name }}</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</section>

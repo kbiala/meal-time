@@ -1,43 +1,56 @@
-<button class="btn btn-default" id="back-btn" ui-sref="root">Close</button>
-<ul>
-  <li>Name: {{ order.name }}</li>
-  <li>Status: {{ order.status }}</li>
-  <li>Creation date: {{ order.created_at }}</li>
-</ul>
+<section id="two" class="wrapper style2 alt">
+  <div class="inner">
+    <h3>{{ order.name }}</h3>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Status:</th>
+          <th>Created at:</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{ order.status }}</td>
+          <td>{{ order.created_at }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <button class="button alt" id="back-btn" ui-sref="root">Close</button>
+    <button class="button special" ng-click="updateOrder('Finalized')" ng-hide="order.status!='New'">Finalize order</button>
+    <button class="button special" ng-click="updateOrder('Ordered')" ng-hide="order.status!='Finalized'">Mark as ordered</button>
+    <button class="button special" ng-click="updateOrder('Delivered')" ng-hide="order.status!='Ordered'">Mark as delivered</button>
+    <button class="button special" ng-hide="order.status!='Delivered'" disabled="disabled">Delivered</button>
 
-<button class="btn btn-info status-button" ng-click="updateOrder('Finalized')" ng-hide="order.status!='New'">Finalize order</button>
-<button class="btn btn-info status-button" ng-click="updateOrder('Ordered')" ng-hide="order.status!='Finalized'">Mark as ordered</button>
-<button class="btn btn-info status-button" ng-click="updateOrder('Delivered')" ng-hide="order.status!='Ordered'">Mark as delivered</button>
-<button class="btn btn-info status-button" ng-hide="order.status!='Delivered'" disabled="disabled">Delivered</button>
+    <table class="table meal-table">
+      <thead>
+        <tr>
+          <th>Meal Name:</th>
+          <th>Price:</th>
+          <th>Added by:</th>
+        </tr>
+      </thead>
+      <tbody id="order-meals">
+        <tr ng-repeat="meal in order.meals">
+          <td>{{ meal.name }}</td>
+          <td>{{ meal.price }}</td>
+          <td>{{ meal.username }}</td>
+        </tr>
+      </tbody>
+    </table>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>Meal Name:</th>
-      <th>Price:</th>
-      <th>Added by:</th>
-    </tr>
-  </thead>
-  <tbody id="order-meals">
-    <tr ng-repeat="meal in order.meals">
-      <td>{{ meal.name }}</td>
-      <td>{{ meal.price }}</td>
-      <td>{{ meal.username }}</td>
-    </tr>
-  </tbody>
-</table>
-
-<form class="form-inline" ng-submit="addMeal()" ng-hide="order.status!='New'">
-  <div class="form-group">
-    <label for="newmeal-name">Name:</label>
-    <input id="newmeal-name" type="text" name="name" ng-model="newMeal.name" />
+    <form class="alt" ng-submit="addMeal()" ng-hide="order.status!='New'">
+      <div class="row uniform">
+        <div>
+          <input id="newmeal-name" type="text" name="name" ng-model="newMeal.name" placeholder="Name"/>
+        </div>
+        <div>
+          <input id="newmeal-price" type="text" name="price" ng-model="newMeal.price" placeholder="Price"/>
+        </div>
+        <div>
+          <input class="alt" type="submit" value="Add your meal">
+        </div>
+      </div>
+    </form>
+    <div id="footer"></div>
   </div>
-  <div class="form-group">
-    <label for="newmeal-price">Price:</label>
-    <input id="newmeal-price" type="text" name="price" ng-model="newMeal.price" />
-  </div>
-  <div class="form-group">
-    <input type="submit" value="Add your meal">
-  </div>
-</form>
-<div id="footer"></div>
+</section>
