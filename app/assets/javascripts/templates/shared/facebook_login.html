@@ -1,8 +1,8 @@
 <div ng-controller="FacebookCtrl">
   <div ng-if="!facebookLoggedIn">
-    <button class="button alt facebook-btn navbar-btn" ng-click="facebookLogin();">Facebook login</button>
+    <button class="button alt navbar-btn header-btn" ng-click="facebookLogin();">Log in with Facebook</button>
   </div>
   <div ng-if="facebookLoggedIn">
-    <button class="button special navbar-btn" ng-click="facebookLogout();">Logout {{ facebookName }}</button>
+    <button class="button special navbar-btn header-btn" ng-click="facebookLogout();">Logout {{ facebookName }}</button>
   </div>
 </div>

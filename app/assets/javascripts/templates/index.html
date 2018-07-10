@@ -1,3 +1,4 @@
+<!--
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -19,6 +20,22 @@
     </div>
   </div>
 </nav>
+-->
+
+<header class="header">
+  <div class="header-titles">
+    <div class="header-titles-main">Hungry?</div>
+    <div class="header-titles-secondary">It's meal time!</div>
+    <div class="header-titles-buttons">
+      <div ng-if="!$root.githubLoggedIn">
+        <div ng-include='"shared/facebook_login.html"'></div>
+      </div>
+      <div ng-if="!$root.facebookLoggedIn">
+        <div ng-include='"shared/github_login.html"'></div>
+      </div>
+    </div>
+  </div>
+</header>
 
 <div ng-include='"orders/list.html"' ></div>
 <div ui-view></div>
