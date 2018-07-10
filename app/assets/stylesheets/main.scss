@@ -769,8 +769,35 @@ header p {
         }
       }
     }
-
   }
+}
+
+.order-show {
+  background-color: $gray-medium;
+  &-title {
+    font-family: 'LuloCleanOneBold';
+    font-size: 29px;
+    color: $violet;
+  }
+  .btn-close {
+    @include button-colors($violet, white, $violet, $violet, white);
+  }
+  .btn-special {
+    @include button-colors($violet, $violet, white, white, $violet);
+  }
+}
+
+/* Footer */
+
+footer {
+  background-color: $green;
+  color: white;
+  font-family: Georgia;
+  font-size: 18px;
+  text-align: center;
+  min-height: 60px;
+  padding-top: 10px;
+
 }
 
 /* Table */
@@ -782,6 +809,11 @@ header p {
 
 .meal-table {
   margin-top: 40px;
+  font-family: Georgia;
+  background-color: $gray;
+  li:hover {
+    background-color: white;
+  }
 }
 
 table {
