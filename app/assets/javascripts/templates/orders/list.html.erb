@@ -13,13 +13,11 @@
               </div>
               <input class="alt order-btn" id="add-order-btn" value="Add" type="submit">
             </div>
-
-
           </form>
         </section>
       </div>
     </section>
-    <section>
+    <section class="orders-list">
       <div ng-controller="OrdersIndexCtrl">
         <ul class="nav nav-tabs" role="tablist">
           <li role="presentation" class="active">
@@ -31,16 +29,36 @@
         </ul>
         <div class="tab-content">
           <div role="tabpanel" class="tab-pane active" id="active">
-            <ul class="contact" id="active-orders-list">
-              <li ng-repeat="order in activeOrders">
-                <a ui-sref="orders.show({id: order.id})" ng-click="setCurrentOrder(order)">{{ order.name }}</a>
+            <ul class="contact tab-content-items" id="active-orders-list">
+              <li ng-repeat="order in activeOrders" class="tab-content-items-item">
+                <div class="row">
+                  <div class="col-3">
+                    <a ui-sref="orders.show({id: order.id})">
+                      <%= image_tag "icons/food-icon-#{rand(1..6)}.png", class: "tab-content-items-item-img" %>
+                    </a>
+                  </div>
+                  <div class="col-7 tab-content-items-item-descr">
+                    <a ui-sref="orders.show({id: order.id})" ng-click="setCurrentOrder(order)">{{ order.name }}</a>
+                    <span class="tab-content-items-item-descr-secondary">{{ order.created_at }}</span>
+                  </div>
+              </div>
               </li>
             </ul>
           </div>
           <div role="tabpanel" class="tab-pane" id="history">
-            <ul class="contact" id="delivered-orders-list">
-              <li ng-repeat="order in deliveredOrders">
-                <a ui-sref="orders.show({id: order.id})">{{ order.name }}</a>
+            <ul class="contact tab-content-items" id="delivered-orders-list">
+              <li ng-repeat="order in deliveredOrders" class="tab-content-items-item">
+                <div class="row">
+                  <div class="col-3">
+                    <a ui-sref="orders.show({id: order.id})">
+                      <%= image_tag "icons/food-icon-#{rand(1..6)}.png", class: "tab-content-items-item-img" %>
+                    </a>
+                  </div>
+                  <div class="col-7 tab-content-items-item-descr">
+                    <a ui-sref="orders.show({id: order.id})">{{ order.name }}</a>
+                    <span class="tab-content-items-item-descr-secondary">{{ order.created_at }}</span>
+                  </div>
+                </div>
               </li>
             </ul>
           </div>
