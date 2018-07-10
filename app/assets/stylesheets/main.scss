@@ -1,3 +1,17 @@
+/* Mixins */
+
+@mixin button-colors($border, $backgr1, $backgr2, $text1, $text2) {
+  border-radius: 0px;
+  border: solid 2px $border;
+  color: $text1 !important;
+  background-color: $backgr1 !important;
+  &:hover {
+    color: $text2 !important;
+    background-color: $backgr2 !important;
+  }
+}
+
+
 /* Basic */
 @-ms-viewport {
   width: device-width;
@@ -23,7 +37,7 @@ body {
 }
 
 body, input, select, textarea {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Georgia, Arial, Helvetica, sans-serif;
   font-size: 13pt;
   font-weight: normal;
   line-height: 2;
@@ -642,19 +656,48 @@ header p {
         font-weight: normal;
         text-transform: none;
         box-shadow: none;
-        border: solid 2px white;
-        border-radius: 0px;
-        color: white;
         height: 60px;
-        &:hover {
-          background-color: white;
-          color: $violet;
-        }
+        @include button-colors(white, transparent, white, white, $violet);
       }
     }
   }
 }
 
+/* Orders containers */
+.orders {
+  &-title {
+    text-align: center;
+    color: $green;
+    font-family: 'PeachesAndCreamRegular';
+    font-size: 90px;
+    line-height: 120px;
+    margin-top: -60px;
+  }
+  &-new {
+    text-align: center;
+    &-image {
+      width: 100%;
+      box-shadow: 5px 10px 18px #888888;
+    }
+    &-title {
+      color: black;
+      padding-top: 60px;
+      font-family: 'LuloCleanOneBold';
+    }
+    input {
+      width: 320px;
+    }
+    .order-btn {
+      box-shadow: none;
+      width: 200px;
+      margin-left: 90px;
+      margin-top: 34px;
+      padding: 0px;
+      @include button-colors($violet, $violet, white, white, $violet);
+    }
+
+  }
+}
 
 /* Table */
 
@@ -814,5 +857,5 @@ table.alt tbody tr td {
 }
 
 .split > :nth-child(even) {
-  border-left-color: rgba(144, 144, 144, 0.25);
+  border-left-color: $violet;
 }

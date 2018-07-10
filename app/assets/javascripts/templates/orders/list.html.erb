@@ -1,19 +1,20 @@
-<section id="one" class="wrapper">
+<section id="one" class="wrapper orders">
+  <div class="orders-title">Orders</div>
   <div class="inner split">
     <section>
       <div ng-controller="OrdersNewCtrl">
-        <section>
-          <h2 id="new-order-title">Add an order</h2>
-          <p>Please put a name of your order in the box below</p>
+        <section class="orders-new">
+          <%= image_tag "meal.png", class: "orders-new-image" %>
+          <h2 id="new-order-title" class="orders-new-title">Add new order</h2>
           <form class="alt" ng-submit="addOrder()">
             <div class="row uniform">
               <div class="6u 12u$(xsmall)">
                 <input name="name" id="order-name-field" placeholder="Name" type="text" ng-model="newOrder.name">
               </div>
+              <input class="alt order-btn" id="add-order-btn" value="Add" type="submit">
             </div>
-            <ul class="actions">
-              <li><input class="alt" id="add-order-btn" value="Add" type="submit"></li>
-            </ul>
+
+
           </form>
         </section>
       </div>
