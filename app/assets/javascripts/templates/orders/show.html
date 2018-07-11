@@ -6,12 +6,14 @@
         <tr>
           <th>Status:</th>
           <th>Created at:</th>
+          <th>Payer:</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td>{{ order.status }}</td>
           <td>{{ order.created_at }}</td>
+          <td>{{ order.payer.name }}</td>
         </tr>
       </tbody>
     </table>

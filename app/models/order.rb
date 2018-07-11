@@ -12,6 +12,7 @@
 class Order < ApplicationRecord
   has_many :meals, dependent: :destroy
   has_many :users, through: :meals
+  belongs_to :payer, class_name: User, optional: true
 
   validates_presence_of :name, :status
   validates :status, inclusion: {
