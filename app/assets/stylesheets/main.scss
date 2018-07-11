@@ -686,17 +686,15 @@ header p {
       font-family: 'LuloCleanOneBold';
     }
     input {
-      width: 320px;
+      width: 100%;
     }
     .order-btn {
       box-shadow: none;
-      width: 200px;
-      margin-left: 90px;
-      margin-top: 34px;
-      padding: 0px;
+      width: 100%;
       @include button-colors($violet, $violet, white, white, $violet);
     }
   }
+
   /* Right orders container */
   .orders-list {
     .nav-tabs {
@@ -706,12 +704,22 @@ header p {
       li:first-of-type {
         padding-right: 16px;
       }
+      li {
+        width: 50%;
+      }
+      @media (max-width: $scrn-medium) {
+        li:first-of-type {
+          padding-right: 0px;
+        }
+        li {
+          width: 100%;
+        }
+      }
       a {
         border: none;
         border-top: 3px solid $violet;
         border-bottom: 3px solid $violet;
         border-radius: 0px;
-        min-width: 257px;
         min-height: 60px;
         font-family: 'LuloCleanOneBold';
         font-size: 14px;
