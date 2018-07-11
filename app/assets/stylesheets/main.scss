@@ -785,6 +785,9 @@ header p {
   .btn-special {
     @include button-colors($violet, $violet, white, white, $violet);
   }
+  input {
+    background-color: $gray;
+  }
 }
 
 /* Footer */
