@@ -636,11 +636,20 @@ header p {
       font-family: 'PeachesAndCreamRegular';
       font-size: 240px;
       line-height: 220px;
+      @media (max-width: $scrm-small) {
+        font-size: 170px;
+      }
     }
     &-secondary {
       font-family: 'LuloCleanOneBold';
       font-size: 56px;
       letter-spacing: 4px;
+      @media (max-width: $scrm-small) {
+        font-size: 40px;
+      }
+      @media (max-width: $scrm-small) {
+        font-size: 24px;
+      }
     }
     &-buttons {
       padding-top: 30px;
@@ -672,6 +681,9 @@ header p {
     font-size: 90px;
     line-height: 120px;
     margin-top: -60px;
+    @media (max-width: $scrm-small) {
+      padding-top: 30px;
+    }
   }
   /* Left orders container */
   &-new {
@@ -714,6 +726,11 @@ header p {
         li {
           width: 100%;
         }
+        @media (max-width: $scrm-small) {
+          li {
+            padding-left: 0px;
+          }
+        }
       }
       a {
         border: none;
@@ -746,6 +763,9 @@ header p {
           background-color: $gray;
           padding: 15px;
           margin-bottom: 20px;
+          @media (max-width: $scrm-small) {
+            margin-left: 0px;
+          }
           &-img {
             height: 65px;
             border: solid 2px black;
@@ -789,9 +809,15 @@ header p {
   }
   .btn-close {
     @include button-colors($violet, white, $violet, $violet, white);
+    @media (max-width: $scrm-small) {
+      width: 220px;
+    }
   }
   .btn-special {
     @include button-colors($violet, $violet, white, white, $violet);
+    @media (max-width: $scrm-small) {
+      width: 220px;
+    }
   }
   input {
     background-color: $gray;
@@ -975,4 +1001,7 @@ table.alt tbody tr td {
 
 .split > :nth-child(even) {
   border-left: solid 3px $violet;
+  @media (max-width: $scrm-small) {
+    border-left: none !important;
+  }
 }
