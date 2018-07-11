@@ -1,0 +1,22 @@
+/* Fonts */
+
+@font-face {
+  font-family: 'PeachesAndCreamRegular';
+  src:font-url('PeachesAndCreamRegular.otf');
+}
+
+@font-face {
+  font-family: 'LuloCleanOneBold';
+  src:font-url('LuloCleanOneBold.otf');
+}
+
+@import url('https://fonts.googleapis.com/css?family=Berkshire+Swash');
+
+/* Colors */
+
+$violet: #630B6C;
+$violet-light: #af5db7;
+$green: #008558;
+$gray: #f2f2f2;
+$gray-medium: #D6D6D6;
+$gray-dark: #636363;

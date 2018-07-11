@@ -1,7 +1,7 @@
-<section id="two" class="wrapper style2 alt">
+<section id="two" class="wrapper style2 alt order-show">
   <div class="inner">
-    <h3>{{ order.name }}</h3>
-    <table class="table">
+    <h3 class="order-show-title">{{ order.name }}</h3>
+    <table class="table meal-table">
       <thead>
         <tr>
           <th>Status:</th>
@@ -15,11 +15,11 @@
         </tr>
       </tbody>
     </table>
-    <button class="button alt" id="back-btn" ui-sref="root">Close</button>
-    <button class="button special" ng-click="updateOrder('Finalized')" ng-hide="order.status!='New'">Finalize order</button>
-    <button class="button special" ng-click="updateOrder('Ordered')" ng-hide="order.status!='Finalized'">Mark as ordered</button>
-    <button class="button special" ng-click="updateOrder('Delivered')" ng-hide="order.status!='Ordered'">Mark as delivered</button>
-    <button class="button special" ng-hide="order.status!='Delivered'" disabled="disabled">Delivered</button>
+    <button class="button alt btn-close" id="back-btn" ui-sref="root">Close</button>
+    <button class="button special btn-special" ng-click="updateOrder('Finalized')" ng-hide="order.status!='New'">Finalize order</button>
+    <button class="button special btn-special" ng-click="updateOrder('Ordered')" ng-hide="order.status!='Finalized'">Mark as ordered</button>
+    <button class="button special btn-special" ng-click="updateOrder('Delivered')" ng-hide="order.status!='Ordered'">Mark as delivered</button>
+    <button class="button special btn-special" ng-hide="order.status!='Delivered'" disabled="disabled">Delivered</button>
 
     <table class="table meal-table">
       <thead>

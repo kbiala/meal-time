@@ -1,0 +1,69 @@
+<section id="one" class="wrapper orders">
+  <div class="orders-title">Orders</div>
+  <div class="inner split">
+    <section>
+      <div ng-controller="OrdersNewCtrl">
+        <section class="orders-new">
+          <%= image_tag "meal.png", class: "orders-new-image" %>
+          <h2 id="new-order-title" class="orders-new-title">Add new order</h2>
+          <form class="alt" ng-submit="addOrder()">
+            <div class="row uniform">
+              <div class="6u 12u$(xsmall)">
+                <input name="name" id="order-name-field" placeholder="Name" type="text" ng-model="newOrder.name">
+              </div>
+              <input class="alt order-btn" id="add-order-btn" value="Add" type="submit">
+            </div>
+          </form>
+        </section>
+      </div>
+    </section>
+    <section class="orders-list">
+      <div ng-controller="OrdersIndexCtrl">
+        <ul class="nav nav-tabs" role="tablist">
+          <li role="presentation" class="active">
+            <a href="#active" aria-controls="active" role="tab" data-toggle="tab">Active orders</a>
+          </li>
+          <li role="presentation">
+            <a href="#history" aria-controls="history" role="tab" data-toggle="tab">Older orders</a>
+          </li>
+        </ul>
+        <div class="tab-content">
+          <div role="tabpanel" class="tab-pane active" id="active">
+            <ul class="contact tab-content-items" id="active-orders-list">
+              <li ng-repeat="order in activeOrders" class="tab-content-items-item">
+                <div class="row">
+                  <div class="col-3">
+                    <a ui-sref="orders.show({id: order.id})">
+                      <%= image_tag "icons/food-icon-#{rand(1..6)}.png", class: "tab-content-items-item-img" %>
+                    </a>
+                  </div>
+                  <div class="col-7 tab-content-items-item-descr">
+                    <a ui-sref="orders.show({id: order.id})" ng-click="setCurrentOrder(order)">{{ order.name }}</a>
+                    <span class="tab-content-items-item-descr-secondary">{{ order.created_at }}</span>
+                  </div>
+              </div>
+              </li>
+            </ul>
+          </div>
+          <div role="tabpanel" class="tab-pane" id="history">
+            <ul class="contact tab-content-items" id="delivered-orders-list">
+              <li ng-repeat="order in deliveredOrders" class="tab-content-items-item">
+                <div class="row">
+                  <div class="col-3">
+                    <a ui-sref="orders.show({id: order.id})">
+                      <%= image_tag "icons/food-icon-#{rand(1..6)}.png", class: "tab-content-items-item-img" %>
+                    </a>
+                  </div>
+                  <div class="col-7 tab-content-items-item-descr">
+                    <a ui-sref="orders.show({id: order.id})">{{ order.name }}</a>
+                    <span class="tab-content-items-item-descr-secondary">{{ order.created_at }}</span>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</section>
