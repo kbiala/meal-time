@@ -90,6 +90,24 @@ RSpec.describe "Orders API", type: :request do
       expect(new_order['status']).to eq('Finalized')
     end
 
+    it 'updates payer when updating status to ordered' do
+      order = create(:order)
+      bank_account = "11112222333344445555"
+
+      put "/orders/#{order.id}", params: {
+        order: { name: 'new_name', status: 'Ordered', bank_account: bank_account},
+        access_token: current_user.access_token
+      }
+
+      new_order = JSON.parse(response.body)
+
+      expect(response).to be_success
+      expect(new_order['name']).to eq('new_name')
+      expect(new_order['status']).to eq('Ordered')
+      expect(new_order['payer']['id']).to eq(current_user.id)
+      expect(new_order['bank_account']).to eq(bank_account)
+    end
+
     it 'returns ok when nothing updated' do
       order = create(:order)
 

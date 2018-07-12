@@ -5,8 +5,12 @@ angular.module('MealTimeModule').controller("OrdersShowCtrl", ($scope, $rootScop
   )
 
   $scope.updateOrder = (newStatus) ->
+    bankAccount = document.getElementById("order-bankaccount").value;
     $scope.order = orderResource.update({id: $scope.order.id}, {
-      status: newStatus,
+      order: {
+        status: newStatus,
+        bank_account: bankAccount
+      },
       access_token: $scope.currentToken()
     }, ->
       if newStatus == "Delivered"

@@ -6,7 +6,7 @@ class OrdersController < ApplicationController
   end
 
   def create
-    order = Order.create!(default_order_params)
+    order = Order.create!(create_order_params)
     render status: :created, json: order
   end
 
@@ -16,7 +16,7 @@ class OrdersController < ApplicationController
   end
 
   def update
-    order_params = default_order_params
+    order_params = update_order_params
     order_params["payer"] = current_user if (params["order"]["status"] == "Ordered")
     order = Order.update(params[:id], order_params)
     render status: :ok, json: order
@@ -29,7 +29,11 @@ class OrdersController < ApplicationController
 
   private
 
-  def default_order_params
+  def create_order_params
     params.require(:order).permit(:name, :meals, :status)
+  end
+
+  def update_order_params
+    params.require(:order).permit(:name, :meals, :status, :bank_account)
   end
 end

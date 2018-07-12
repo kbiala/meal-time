@@ -7,6 +7,7 @@
           <th>Status:</th>
           <th>Created at:</th>
           <th>Payer:</th>
+          <th>Payer's bank account:</th>
         </tr>
       </thead>
       <tbody>
@@ -14,14 +15,22 @@
           <td>{{ order.status }}</td>
           <td>{{ order.created_at }}</td>
           <td>{{ order.payer.name }}</td>
+          <td>{{ order.bank_account }}</td>
         </tr>
       </tbody>
     </table>
-    <button class="button alt btn-close" id="back-btn" ui-sref="root">Close</button>
-    <button class="button special btn-special" ng-click="updateOrder('Finalized')" ng-hide="order.status!='New'">Finalize order</button>
-    <button class="button special btn-special" ng-click="updateOrder('Ordered')" ng-hide="order.status!='Finalized'">Mark as ordered</button>
-    <button class="button special btn-special" ng-click="updateOrder('Delivered')" ng-hide="order.status!='Ordered'">Mark as delivered</button>
-    <button class="button special btn-special" ng-hide="order.status!='Delivered'" disabled="disabled">Delivered</button>
+    <div class="row uniform">
+      <div class="col-xs-12 col-lg-6">
+        <button class="button alt btn-close" id="back-btn" ui-sref="root">Close</button>
+        <button class="button special btn-special" ng-click="updateOrder('Finalized')" ng-hide="order.status!='New'">Finalize order</button>
+        <button class="button special btn-special" ng-click="updateOrder('Ordered')" ng-hide="order.status!='Finalized'">Mark as ordered</button>
+        <button class="button special btn-special" ng-click="updateOrder('Delivered')" ng-hide="order.status!='Ordered'">Mark as delivered</button>
+        <button class="button special btn-special" ng-hide="order.status!='Delivered'" disabled="disabled">Delivered</button>
+      </div>
+      <div class="col-xs-12 col-lg-6">
+        <input id="order-bankaccount" type="text" name="bankAccount" placeholder="Put your bank account number here" ng-hide="order.status!='Finalized'"/>
+      </div>
+    </div>
 
     <table class="table meal-table">
       <thead>
